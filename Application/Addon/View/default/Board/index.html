@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title>微信表白墙</title>
+    <link href="http://cdn.bootcss.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <script src="http://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+    <script src="http://cdn.bootcss.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+    <script src="__APP__{$Think.config.board_js}"></script>
+    <link href="__APP__{$Think.config.board_css}" rel="stylesheet">
+</head>
+<body>
+	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+            	<a class="navbar-brand" href="#" onclick="location.reload();">玩转湖大——微信表白墙</a>
+            </div>
+        </div>
+    </nav>
+	<div class="container">
+		<p><br/><br/></p>
+		<h3 class="well" id="top">&nbsp;&nbsp;&nbsp;&nbsp;——I See You but Once Then Never Again</h3>
+	</div>
+	<!-- content -->
+	<div class="container" id="content">
+	</div>
+    <div id="ToolBar"> 
+		<a title="返回顶部" href="#top">&nbsp;<span class="glyphicon glyphicon-arrow-up"></span>&nbsp;</a>
+ 	</div>
+    <button class="btn btn-primary btn-sm" data-toggle="modal" 
+   data-target="#myModal" id="modalBtn">
+   点此表白
+	</button>
+    <!-- 模态框（Modal） -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" 
+       aria-labelledby="myModalLabel" aria-hidden="true">
+       <div class="modal-dialog">
+          <div class="modal-content">
+             <div class="modal-header">
+                <button type="button" class="close" 
+                   data-dismiss="modal" aria-hidden="true">
+                      &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                	我的心声
+                </h4>
+             </div>
+             <div class="modal-body">
+             	<form class="form-inline" id="inputForm">
+					<div class="form-group">
+						<label for="from" class="form-label">From:</label>
+						<input id="from" name="from" type="text" class="form-control" placeholder="匿名"/>
+					</div>
+					<div class="form-group">
+						<label for="to" class="form-label">To:</label>
+						<input id="to" name="to" type="text" class="form-control" placeholder="无"/>
+					</div>
+                	<div class="form-group">
+                    	<textarea class="form-control input-lg" id="inputMsg" name="inputMsg" placeholder="在此输入内容"></textarea>
+                    </div>
+                </form>
+             </div>
+             <div class="modal-footer">
+                <button type="button" class="btn btn-default" 
+                   data-dismiss="modal">关闭
+                </button>
+                <button type="button" class="btn btn-primary" id="submit">
+                   提交
+                </button>
+             </div>
+          </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</body>
+</html>

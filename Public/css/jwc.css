@@ -1,0 +1,22 @@
+.nav,.navbar-nav{
+	margin-top:0;
+	margin-bottom:0;
+}
+.active{
+	color: #555;
+	background-color: #E7E7E7;
+}
+ul.nav li{
+	height:50px;
+}
+ul li a, #submit{
+	font-size:larger;
+}
+#main{
+	padding-top:50px;
+	padding-bottom:70px;
+}
+#tool{
+	position:absolute;
+	bottom:100px;
+}

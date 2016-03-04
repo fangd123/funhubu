@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0">
+	<title>学期课表</title>
+	<link href="{$Think.config.bootstrap_css}" rel="stylesheet">
+	<script src="{$Think.config.jquery_js}"></script>
+	<script src="{$Think.config.bootstrap_js}"></script>
+	<link href="__APP__{$Think.config.jwc_css}" rel="stylesheet">
+	<style>
+		table{
+			font-size:80%;
+		}
+	</style>
+</head>
+<body class="text-center">
+	<nav class="navbar navbar-default navbar-fixed-bottom">
+		<ul class="nav navbar-nav">
+			<li class="col-xs-4 active"><a href="{:U('Jwxt/course')}?open_id={$Think.get.open_id}">课表</a></li>
+			<li class="col-xs-4"><a href="{:U('Jwxt/grade')}?open_id={$Think.get.open_id}">成绩</a></li>
+			<li class="col-xs-4"><a href="{:U('Jwxt/exam')}?open_id={$Think.get.open_id}">考试</a></li>
+		</ul>
+	</nav>
+	<div class="container" id="main">
+		{//显示缓存数据}
+		<if condition="$course.status eq 'success'">
+		<div class="row">
+			<table class="table table-bordered well">
+				<foreach name="course.data" item="row">
+					<tr>
+					<foreach name="row" item="cell">
+						<td>{$cell}</td>
+					</foreach>
+					</tr>
+				</foreach>
+			</table>
+			<p class="text-info">以上为服务器缓存的数据</p>
+		</div>
+		</if>
+
+		{//显示表单}
+		<form class="form form-horizontal">
+		<if condition="$account neq true">
+			<div class="form-group">
+				<label for="username" class="col-xs-3 form-label">学号:</label>
+				<div class="col-xs-7">
+					<input type="text" id="username" name="username" class="form-control"/>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="password" class="col-xs-3 form-label">密码:</label>
+				<div class="col-xs-7">
+					<input type="password" id="password" name="password" class="form-control"/>
+				</div>
+			</div>
+		</if>
+
+		{//选择学期}
+			<div class="form-group">
+				<label for="semester" class="form-label col-xs-3 text-center">学期:</label>
+				<div class="col-xs-7">
+					<select name="semester" id="semester" class="form-control">	
+					<foreach name="semester" item="flag">
+						<option value="{$key}" <if condition="$flag eq 1">selected</if>>{$key}</option>
+					</foreach>
+					</select>
+				</div>
+			</div>
+
+		{//验证码}
+		<if condition="$cookie.type eq 'new'">
+			<div class="form-group">
+				<label for="verify" class="col-xs-3 form-label">验证码:</label>
+				<div class="col-xs-7">
+					<input type="text" id="verify" name="verify" class="form-control"/>
+				</div>
+			</div>
+			<div class="form-group">
+				<img src="{:U('Jwxt/verify')}?cookie={$cookie.data}" class="col-xs-4 col-xs-offset-4"/>
+			</div>
+		</if>
+			<input type="hidden" name="cookie" value="{$cookie.data}"/>
+			<button type="button" id="submit" class="btn col-xs-4 col-xs-offset-4 btn-default">查询</button>
+		</form>
+	</div>
+	<div id="tool" class="container">
+		<img src="__APP__{$Think.config.loading_img}"/>
+	</div>
+	<script src="__APP__{$Think.config.jwc_js}"></script>
+</body>
+</html>

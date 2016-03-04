@@ -1,0 +1,57 @@
+[ 2015-08-27T16:54:52+08:00 ] ::1 /newfunhubu/1/
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000012s ]
+SQL: SHOW COLUMNS FROM `request` [ RunTime:0.0004s ]
+NOTIC: [8] Use of undefined constant IS_POST - assumed 'IS_POST' /var/www/newfunhubu/1/Application/Addon/Behaviors/RequestBehavior.class.php 第 18 行.
+NOTIC: [8] Undefined index: query_string /var/www/newfunhubu/1/Application/Addon/Behaviors/RequestBehavior.class.php 第 24 行.
+SQL: INSERT INTO `request` (`ip`,`user_agent`,`method`,`uri`,`query_string`) VALUES ('0.0.0.0','Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101 Firefox/38.0 Iceweasel/38.2.0','GET','/newfunhubu/1/','') [ RunTime:0.0001s ]
+INFO: Run Addon\Behaviors\RequestBehavior [ RunTime:0.006257s ]
+INFO: [ app_init ] --END-- [ RunTime:0.006488s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000449s ]
+SQL: SELECT * FROM `action` WHERE `isAvailable` = 1 AND `name` = 'Home/Index/index' LIMIT 1   [ RunTime:0.0002s ]
+SQL: SHOW COLUMNS FROM `action_conf` [ RunTime:0.0004s ]
+SQL: SELECT * FROM `action_conf` WHERE ( 1=1 AND action_id='1' ) LIMIT 1   [ RunTime:0.0000s ]
+NOTIC: [8] Use of undefined constant ture - assumed 'ture' /var/www/newfunhubu/1/Application/Common/Common/function.php 第 5 行.
+INFO: Run Addon\Behaviors\CheckBehavior [ RunTime:0.002437s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002959s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000021s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000055s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.002857s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.002888s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000075s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000099s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000265s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000293s ]
+
+[ 2015-08-27T17:07:36+08:00 ] ::1 /newfunhubu/1/
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000022s ]
+SQL: SHOW COLUMNS FROM `request` [ RunTime:0.0005s ]
+NOTIC: [8] Use of undefined constant IS_POST - assumed 'IS_POST' /var/www/newfunhubu/1/Application/Addon/Behaviors/RequestBehavior.class.php 第 18 行.
+NOTIC: [8] Undefined index: query_string /var/www/newfunhubu/1/Application/Addon/Behaviors/RequestBehavior.class.php 第 24 行.
+SQL: INSERT INTO `request` (`ip`,`user_agent`,`method`,`uri`,`query_string`) VALUES ('0.0.0.0','Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101 Firefox/38.0 Iceweasel/38.2.0','GET','/newfunhubu/1/','') [ RunTime:0.0002s ]
+INFO: Run Addon\Behaviors\RequestBehavior [ RunTime:0.006338s ]
+INFO: [ app_init ] --END-- [ RunTime:0.006778s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000294s ]
+SQL: SELECT * FROM `action` WHERE `isAvailable` = 1 AND `name` = 'Home/Index/index' LIMIT 1   [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `action_conf` [ RunTime:0.0004s ]
+SQL: SELECT * FROM `action_conf` WHERE ( 1=1 AND action_id='1' ) LIMIT 1   [ RunTime:0.0002s ]
+NOTIC: [8] Use of undefined constant ture - assumed 'ture' /var/www/newfunhubu/1/Application/Common/Common/function.php 第 5 行.
+INFO: Run Addon\Behaviors\CheckBehavior [ RunTime:0.002288s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002630s ]
+INFO: [ view_parse ] --START--
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.000098s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.000129s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000078s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000102s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000461s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000522s ]
+
