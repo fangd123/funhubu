@@ -96,14 +96,14 @@ class ExamModel extends Model {
 		if(empty($result)){
 			return;
 		}
-		$where = array('user_id' => $userId);
+		$where = array('user_id' => $userId, 'semester' => $semester);
 		foreach($result as $row){
-			$where['semester'] = $row['semester'];
 			$where['name'] = $row['name'];
 			if($this->where($where)->find()){
 				continue;
 			}
 			$row['user_id'] = $userId;
+			$row['semester'] = $semester;
 			$this->add($row);
 		}
 	}

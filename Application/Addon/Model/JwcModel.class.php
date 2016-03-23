@@ -51,7 +51,7 @@ class JwcModel {
 		}
 
 		//登录成功,缓存cookie
-		$mc = memcache_init();
+		$mc = S(array('type'=>'memcached'));
 		$cookie = $mc->set(I('get.open_id') . '_cookie', I('post.cookie'), 0 ,1800);
 
 		//未绑定帐号，记录教务处帐号并对用户进行分组
@@ -99,7 +99,7 @@ class JwcModel {
 	//获取cookie，如果存在缓存则获取缓存，否则从教务处获取新的
 	public function getCookie(){
 		$openId = I('get.open_id');
-		$mc = memcache_init();
+		$mc = S(array('type'=>'memcached'));
 		$cookie = $mc->get($openId . '_cookie');
 
 		if(!empty($cookie) && $this->hubu->validateSession($cookie)){
@@ -109,7 +109,7 @@ class JwcModel {
 			);
 		}
 		if(!empty($cookie)){
-			$mc = memcache_init();
+			$mc = S(array('type'=>'memcached'));
 			$mc->delete($openId . '_cookie');
 			$mc->delete($openId . '_do');
 			$mc->delete($openId . '_data');

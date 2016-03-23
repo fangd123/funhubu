@@ -6,7 +6,7 @@ use Think\Controller;
 class CetController extends Controller {
 	public function index($weObj){
 		$openId = $weObj->getRevFrom();
-		$mc = memcache_init();
+		$mc = S(array('type'=>'memcached'));
 		$mc->set($openId . '_do', 'Addon/Cet/getNum', 0, 600);
 		return array(
 			'type' => 'text',
@@ -24,7 +24,7 @@ class CetController extends Controller {
 				'data' => '请输入您的考号:',
 			);
 		}
-		$mc = memcache_init();
+		$mc = S(array('type'=>'memcached'));
 		$mc->set($openId . '_do', 'Addon/Cet/getName', 0, 600);
 		$mc->set($openId . '_data', $data,0, 600);
 		return array(
@@ -46,7 +46,7 @@ class CetController extends Controller {
 			);
 		}
 		
-		$mc = memcache_init();
+		$mc = S(array('type'=>'memcached'));
 		$num = $mc->get($openId .'_data');
 
 		$Cet = D('Addon/Cet');

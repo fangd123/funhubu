@@ -11,37 +11,26 @@ class LibBorrowModel extends Model {
 		'borrow_date',
 		'return_date',
 		'place',
-		'update_time',
 	);
 
-	//记录历史借阅
+	//记录历史借阅，按时间进行增量记录
 	public function log($userId, $result){
 		if(!is_array($result)){
 			return;
 		}
 		$data['user_id'] = $userId;
-		foreach($result as $row){
-			$data['book_id'] = $row['book_id'];
-			$data['borrow_date'] = $row['borrow_date'];
-			$data['return_date'] = $row['return_date'];
-			$data['place'] = $row['place'];
-			if($this->where($data)->find()){
-				continue;
-			}
-			$this->fetchSql()->add($data);
-		}
-	}
+		//已记录的借阅数
+		$records = $this->where($data)->count();
+		//总借数
+		$counts = count($result);
 
-	//是否更新借阅记录
-	public function needUpdate($userId){
-		$where = array('user_id' => $userId);
-		$updateTime = $this->where($where)->order('update_time desc')->getField('update_time');
-
-		$updateTime = strtotime($updateTime);
-		$now = time();
-		$expired = 10 * 24 * 60 * 60;
-		if($updateTime + $expired < $now){
-			return true;
+		//按时间顺序插入未记录的部分
+		for($i = $counts - $records - 1; $i >= 0; $i--){
+			$data['book_id'] = $result[$i]['book_id'];
+			$data['borrow_date'] = $result[$i]['borrow_date'];
+			$data['return_date'] = $result[$i]['return_date'];
+			$data['place'] = $result[$i]['place'];
+			$this->add($data);
 		}
 	}
 }

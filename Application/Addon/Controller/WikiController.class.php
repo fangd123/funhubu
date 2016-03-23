@@ -12,7 +12,7 @@ class WikiController extends Controller {
 		if(!empty($keys)){
 			$data = "请从以下领域中选择(输入exit退出):\n";
 			$data .= implode("\n",$keys);
-			$mc = memcache_init();
+			$mc = S(array('type'=>'memcached'));
 			$mc->set($openId.'_do' ,'Addon/Wiki/key', 0, 600);
 		}else{
 			$data = '此功能暂时无法使用';
@@ -26,7 +26,7 @@ class WikiController extends Controller {
 	public function key($weObj){
 		$openId = $weObj->getRevFrom();
 		$key = trim($weObj->getRevContent());
-		$mc = memcache_init();
+		$mc = S(array('type'=>'memcached'));
 		if(empty($key)){
 			$mc->delete($openId.'_do');
 			return array(
@@ -67,7 +67,7 @@ class WikiController extends Controller {
 	public function search($weObj){
 		$openId = $weObj->getRevFrom();
 		$content = trim($weObj->getRevContent());
-		$mc = memcache_init();
+		$mc = S(array('type'=>'memcached'));
 		$id = $mc->get($openId.'_data');
 		$wikiContent = D('Addon/WikiContent');
 		$data = $wikiContent->search($id, $content);

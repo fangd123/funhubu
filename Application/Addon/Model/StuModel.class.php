@@ -29,7 +29,7 @@ class StuModel extends Model {
 	//删除指定用户绑定的教务处帐号
 	public function deleteAccount($userId){
 		$data = $this->where(array('user_id' => $userId))->delete();
-		$mc = memcache_init();
+		$mc = S(array('type'=>'memcached'));
 		$mc->delete($openId . '_cookie');
 		$mc->delete($openId . '_do');
 		$mc->delete($openId . '_data');

@@ -26,7 +26,7 @@ class AddonModel extends RelationModel {
 	*/
 	public function checkAddon($openId, $addonId){
 		if($addonId != 1){	//1为退出操作
-			$mc = memcache_init();
+			$mc = S(array('type'=>'memcached'));
 			if($addonName = $mc->get($openId.'_do')){
 				return $addonName;
 			}

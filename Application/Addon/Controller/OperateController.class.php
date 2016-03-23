@@ -19,11 +19,11 @@ class OperateController extends Controller {
 				$data .= $value ."\n";
 			}
 		}
-		$mc = memcache_init();
+		$mc = S(array('type'=>'memcached'));
 		$mc->set($openId.'_do', 'Addon/Operate/group', 0, 600);
 		return array(
 			'type' => 'text',
-			'data' => "欢迎来到魔法世界，请选择身份:\n".$data,
+			'data' => "为了更好的用户体验，请选择你的身份:\n".$data,
 		);
 	}
 
@@ -34,7 +34,7 @@ class OperateController extends Controller {
 		$group = new \Addon\Model\GroupModel();
 		$groupId = $group->getGroupId($target);
 
-		$mc = memcache_init();
+		$mc = S(array('type'=>'memcached'));
 		//未按要求选择分组
 		if(empty($groupId)){
 			//返回错误信息
@@ -81,7 +81,7 @@ class OperateController extends Controller {
 	//用户取消订阅
 	public function unsubscribe($weObj){
 		$openId = $weObj->getRevFrom();
-		$mc = memcache_init();
+		$mc = S(array('type'=>'memcached'));
 		$mc->delete($openId .'_do');
         $mc->delete($openId.'_error');
 		$mc->delete($openId.'_data');

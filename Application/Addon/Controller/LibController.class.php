@@ -14,7 +14,7 @@ class LibController extends Controller {
 			return $result;
 		}
 
-		$mc = memcache_init();
+		$mc = S(array('type'=>'memcached'));
 		$mc->set($openId .'_do', 'Addon/Lib/searchBook', 0 , 600);
 		return array(
 			'type' => 'text',
@@ -29,7 +29,7 @@ class LibController extends Controller {
 		$userId = $user->getUserId($openId);
 		$keyword = trim($weObj->getRevContent());
 		if(empty($keyword)){
-			$mc = memcache_init();
+			$mc = S(array('type'=>'memcached'));
 			$mc->delete($openId .'_do');
 			return array(
 				'type' => 'text',
@@ -65,14 +65,14 @@ class LibController extends Controller {
 
 		//失败处理
 		if($status == 'error'){
-			$mc = memcache_init();
+			$mc = S(array('type'=>'memcached'));
 			$mc->set($openId.'_do','Addon/Lib/bind', 0, 600);
 			return array(
 				'type' => 'text',
 				'data' => '您的帐号已经过期，请重新绑定(学号+密码,默认密码为学号,如20150001+20150001):',
 			);
 		}elseif($status == 'validate'){
-			$mc = memcache_init();
+			$mc = S(array('type'=>'memcached'));
 			$mc->set($openId.'_do','Addon/Lib/validate', 0, 600);
 			return array(
 				'type' => 'text',
@@ -80,12 +80,10 @@ class LibController extends Controller {
 			);
 		}
 
-		//每隔一段时间获取一次历史查询
+		//记录历史查询
 		$libBorrow = D('Addon/LibBorrow');
-		if($libBorrow->needUpdate($userId)){
-			$result = $lib->getBorrowList();
-			$libBorrow->log($userId, $result);
-		}
+		$result = $lib->getBorrowList();
+		$libBorrow->log($userId, $result);
 
 		//返回借阅数据
 		return $lib->getBookRemind();
@@ -126,7 +124,7 @@ class LibController extends Controller {
 
 		//帐号密码正确，但需要验证
 		if($status == 'validate'){
-			$mc = memcache_init();
+			$mc = S(array('type'=>'memcached'));
 			$mc->set($openId.'_do' ,'Addon/Lib/validate', 0 ,600);
 			return array(
 				'type' => 'text',
@@ -134,7 +132,7 @@ class LibController extends Controller {
 			);
 		}
 
-		$mc = memcache_init();
+		$mc = S(array('type'=>'memcached'));
 		$mc->delete($openId .'_do');
 	
 		return array(
@@ -172,7 +170,7 @@ class LibController extends Controller {
 			);
 		}
 
-		$mc = memcache_init();
+		$mc = S(array('type'=>'memcached'));
 		$mc->delete($openId .'_do');
 		return array(
 			'type' => 'text',
@@ -195,7 +193,7 @@ class LibController extends Controller {
 		$stuLib = D('Addon/StuLib');
 		$hasAccount = $stuLib->hasAccount($userId);
 		if(!$hasAccount){
-			$mc = memcache_init();
+			$mc = S(array('type'=>'memcached'));
 			$mc->set($openId . '_do', 'Addon/Lib/bind', 0, 600);
 			return array(
 				'type' => 'text',

@@ -7,7 +7,7 @@ class ExitController extends Controller {
 	public function index($weObj){
 		//清空数据，如果后期数据增加此处也应该做出相应的改变
 		$openId = $weObj->getRevFrom();
-		$mc = memcache_init();
+		$mc = S(array('type'=>'memcached'));
 		$mc->delete($openId . '_do');
 		$mc->delete($openId . '_data');
 
