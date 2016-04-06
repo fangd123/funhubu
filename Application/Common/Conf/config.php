@@ -36,4 +36,8 @@ return array(
 	'BOARD_JS' => '/Public/js/board.js',
 	'BOARD_CSS' => '/Public/css/board.css',
 	
+	'DATE_CACHE_TIME' => '1800',
+	'DATA_CACHE_PREFIX' => 'wx',
+	'DATA_CACHE_TYPE' => 'memcached',
+	'MEMCACHED_SERVER' => array(array('127.0.0.1', '11211', 0)),
 );
