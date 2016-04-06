@@ -14,7 +14,7 @@ class IndexController extends Controller {
 			'appid' => C('APPID'),
 			'appsecret' => C('APPSECRET'),
 		));
-		//$this->weObj->valid();
+		$this->weObj->valid();
 	}
 
     public function index(){
