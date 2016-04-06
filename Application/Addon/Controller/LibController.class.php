@@ -15,7 +15,7 @@ class LibController extends Controller {
 		}
 
 		$mc = S(array('type'=>'memcached'));
-		$mc->set($openId .'_do', 'Addon/Lib/searchBook', 0 , 600);
+		$mc->set($openId .'_do', 'Addon/Lib/searchBook', 600);
 		return array(
 			'type' => 'text',
 			'data' => '请输入书名（退出请输入“exit”）：',
@@ -30,7 +30,7 @@ class LibController extends Controller {
 		$keyword = trim($weObj->getRevContent());
 		if(empty($keyword)){
 			$mc = S(array('type'=>'memcached'));
-			$mc->delete($openId .'_do');
+			$mc->rm($openId .'_do');
 			return array(
 				'type' => 'text',
 				'data' => '操作失败',
@@ -66,14 +66,14 @@ class LibController extends Controller {
 		//失败处理
 		if($status == 'error'){
 			$mc = S(array('type'=>'memcached'));
-			$mc->set($openId.'_do','Addon/Lib/bind', 0, 600);
+			$mc->set($openId.'_do','Addon/Lib/bind', 600);
 			return array(
 				'type' => 'text',
 				'data' => '您的帐号已经过期，请重新绑定(学号+密码,默认密码为学号,如20150001+20150001):',
 			);
 		}elseif($status == 'validate'){
 			$mc = S(array('type'=>'memcached'));
-			$mc->set($openId.'_do','Addon/Lib/validate', 0, 600);
+			$mc->set($openId.'_do','Addon/Lib/validate', 600);
 			return array(
 				'type' => 'text',
 				'data' => '为了保证您的帐号安全，请输入姓名验证:',
@@ -125,7 +125,7 @@ class LibController extends Controller {
 		//帐号密码正确，但需要验证
 		if($status == 'validate'){
 			$mc = S(array('type'=>'memcached'));
-			$mc->set($openId.'_do' ,'Addon/Lib/validate', 0 ,600);
+			$mc->set($openId.'_do' ,'Addon/Lib/validate', 600);
 			return array(
 				'type' => 'text',
 				'data' => '为了保证您的帐号安全，请输入姓名验证:',
@@ -133,7 +133,7 @@ class LibController extends Controller {
 		}
 
 		$mc = S(array('type'=>'memcached'));
-		$mc->delete($openId .'_do');
+		$mc->rm($openId .'_do');
 	
 		return array(
 			'type' => 'text',
@@ -171,7 +171,7 @@ class LibController extends Controller {
 		}
 
 		$mc = S(array('type'=>'memcached'));
-		$mc->delete($openId .'_do');
+		$mc->rm($openId .'_do');
 		return array(
 			'type' => 'text',
 			'data' => '验证成功',
@@ -194,7 +194,7 @@ class LibController extends Controller {
 		$hasAccount = $stuLib->hasAccount($userId);
 		if(!$hasAccount){
 			$mc = S(array('type'=>'memcached'));
-			$mc->set($openId . '_do', 'Addon/Lib/bind', 0, 600);
+			$mc->set($openId . '_do', 'Addon/Lib/bind', 600);
 			return array(
 				'type' => 'text',
 				'data' => ' 请绑定图书馆帐号,格式：帐号+密码,如：20150001+123456',

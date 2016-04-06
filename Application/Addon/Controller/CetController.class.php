@@ -7,7 +7,7 @@ class CetController extends Controller {
 	public function index($weObj){
 		$openId = $weObj->getRevFrom();
 		$mc = S(array('type'=>'memcached'));
-		$mc->set($openId . '_do', 'Addon/Cet/getNum', 0, 600);
+		$mc->set($openId . '_do', 'Addon/Cet/getNum', 600);
 		return array(
 			'type' => 'text',
 			'data' => '请输入您的考号（输入"exit"退出）：',
@@ -25,8 +25,8 @@ class CetController extends Controller {
 			);
 		}
 		$mc = S(array('type'=>'memcached'));
-		$mc->set($openId . '_do', 'Addon/Cet/getName', 0, 600);
-		$mc->set($openId . '_data', $data,0, 600);
+		$mc->set($openId . '_do', 'Addon/Cet/getName', 600);
+		$mc->set($openId . '_data', $data, 600);
 		return array(
 			'type' => 'text',
 			'data' => '请输入您的姓名(前两个字）:',
@@ -61,8 +61,8 @@ class CetController extends Controller {
 			$result = $grade;
 		}
 
-		$mc->delete($openId . '_do');
-		$mc->delete($openId . '_data');
+		$mc->rm($openId . '_do');
+		$mc->rm($openId . '_data');
 
 		return array(
 			'type' => 'text',

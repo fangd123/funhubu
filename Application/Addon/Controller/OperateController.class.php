@@ -20,7 +20,7 @@ class OperateController extends Controller {
 			}
 		}
 		$mc = S(array('type'=>'memcached'));
-		$mc->set($openId.'_do', 'Addon/Operate/group', 0, 600);
+		$mc->set($openId.'_do', 'Addon/Operate/group', 600);
 		return array(
 			'type' => 'text',
 			'data' => "为了更好的用户体验，请选择你的身份:\n".$data,
@@ -52,12 +52,12 @@ class OperateController extends Controller {
 			}
 			$count++;
 			if($count < 3){
-				$mc->set($openId.'_error', $count, 0, 600);
+				$mc->set($openId.'_error', $count, 600);
 			}else{
 				$user = D('Weixin/User');
 				$user->lockUser($openId);
-				$mc->delete($openId.'_do');
-				$mc->delete($openId.'_error');
+				$mc->rm($openId.'_do');
+				$mc->rm($openId.'_error');
 			}
 			return array(
 				'type' => 'text',
@@ -70,8 +70,8 @@ class OperateController extends Controller {
 		}else{
 			$data = '选择身份失败';
 		}
-		$mc->delete($openId .'_do');
-		$mc->delete($openId.'_error');
+		$mc->rm($openId .'_do');
+		$mc->rm($openId.'_error');
 		return array(
 			'type' => 'text',
 			'data' => $data,
@@ -82,8 +82,8 @@ class OperateController extends Controller {
 	public function unsubscribe($weObj){
 		$openId = $weObj->getRevFrom();
 		$mc = S(array('type'=>'memcached'));
-		$mc->delete($openId .'_do');
-        $mc->delete($openId.'_error');
-		$mc->delete($openId.'_data');
+		$mc->rm($openId .'_do');
+        $mc->rm($openId.'_error');
+		$mc->rm($openId.'_data');
 	}
 }

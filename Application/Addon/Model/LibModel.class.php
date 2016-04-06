@@ -129,7 +129,7 @@ class LibModel {
 			$results[$i]['Title'] = $results[$i]['Title']."\n".
 				"借阅日期：".$results[$i]['borrowDate']."\n".
 				"应还日期：".$results[$i]['returnDate']."\n".
-				"<a href=\"http://newfunhubu.sinaapp.com/Addon/Lib/renew.html?cookie={$this->snoopy->cookies['PHPSESSID']}&booknum={$results[$i]['bookNumber']}\">续借</a>"."\n=============\n";
+				"<a href=\"".U('Addon/Lib/renew@wx.0x2c.cn')."?cookie={$this->snoopy->cookies['PHPSESSID']}&booknum={$results[$i]['bookNumber']}\">续借</a>"."\n=============\n";
 		}
 		if(isset($results)){
 			foreach($results as $i=>$value) {

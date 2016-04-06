@@ -13,7 +13,7 @@ class WikiController extends Controller {
 			$data = "请从以下领域中选择(输入exit退出):\n";
 			$data .= implode("\n",$keys);
 			$mc = S(array('type'=>'memcached'));
-			$mc->set($openId.'_do' ,'Addon/Wiki/key', 0, 600);
+			$mc->set($openId.'_do' ,'Addon/Wiki/key', 600);
 		}else{
 			$data = '此功能暂时无法使用';
 		}
@@ -28,7 +28,7 @@ class WikiController extends Controller {
 		$key = trim($weObj->getRevContent());
 		$mc = S(array('type'=>'memcached'));
 		if(empty($key)){
-			$mc->delete($openId.'_do');
+			$mc->rm($openId.'_do');
 			return array(
 				'type' => 'text',
 				'data' => '操作失败',
@@ -38,7 +38,7 @@ class WikiController extends Controller {
 		$wikiKey = D('Addon/WikiKey');
 		$id = $wikiKey->getKeyId($key);
 		if(empty($id)){
-			$mc->delete($openId.'_do');
+			$mc->rm($openId.'_do');
 			return array(
 				'type' => 'text',
 				'data' => '不存在该项',
@@ -47,14 +47,14 @@ class WikiController extends Controller {
 		$wikiContent = D('Addon/WikiContent');
 		$list = $wikiContent->getList();
 		if(empty($list)){
-			$mc->delete($openId.'_do');
+			$mc->rm($openId.'_do');
 			return array(
 				'type' => 'text',
 				'data' => '该分类下无数据',
 			);
 		}
-		$mc->set($openId.'_data', $id, 0, 600);
-		$mc->set($openId.'_do', 'Addon/Wiki/search', 0 , 600);
+		$mc->set($openId.'_data', $id, 600);
+		$mc->set($openId.'_do', 'Addon/Wiki/search', 600);
 		$data = "从以下列表中选择(输入exit退出):\n";
 		$data .= implode("\n", $list);
 		return array(

@@ -30,9 +30,9 @@ class StuModel extends Model {
 	public function deleteAccount($userId){
 		$data = $this->where(array('user_id' => $userId))->delete();
 		$mc = S(array('type'=>'memcached'));
-		$mc->delete($openId . '_cookie');
-		$mc->delete($openId . '_do');
-		$mc->delete($openId . '_data');
+		$mc->rm($openId . '_cookie');
+		$mc->rm($openId . '_do');
+		$mc->rm($openId . '_data');
 	}
 
 	//记录用户名密码
