@@ -36,8 +36,8 @@ class BoardController extends Controller {
 				array(
 					'Title'=>'与你相约，玩转湖大表白墙',
 					'Description'=>"你的忧伤\n眼看就要\n越过眉头\n淹没我的双肩\n我的哀愁\n却无法让你看见\n相信我是爱你的",
-					'PicUrl'=>'http://newfunhubu.sinaapp.com/Public/img/board.jpg',
-					'Url'=>'http://newfunhubu.sinaapp.com/Addon/Board?open_id='.$openId,
+					'PicUrl'=>'http://wx.0x2c.cn/Public/img/board.jpg',
+					'Url'=>'http://wx.0x2c.cn/Addon/Board?open_id='.$openId,
 				),
 			),
 		);
