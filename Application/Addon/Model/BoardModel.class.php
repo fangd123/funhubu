@@ -56,12 +56,12 @@ class BoardModel extends Model {
 			return(array('status'=>'error','code'=>'请填写内容'));
 		}
 		$data['user_id'] = $userId;
-		$data['content'] = $content;
+		$data['content'] = htmlspecialchars($content);
 		if(!empty($from)){
-			$data['from'] = $from;
+			$data['from'] = htmlspecialchars($from);
 		}
 		if(!empty($to)){
-			$data['to'] = $to;
+			$data['to'] = htmlspecialchars($to);
 		}
 		$res = $this->add($data);
 		if(empty($res)){
