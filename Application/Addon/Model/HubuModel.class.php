@@ -134,7 +134,7 @@ class HubuModel {
 				'isview' => 1,
 				'zc' => '',
 				'xnxq01id' => $semester,
-				'xs0101xm' => '陈梁',
+				'xs0101xm' => $name,
 				'xs0101id' => $stuId,
 			);
 			$this->snoopy->submit($url, $form);
